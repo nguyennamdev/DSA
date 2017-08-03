@@ -21,7 +21,7 @@ int main(int count, const char* args[])
     int *p, *q;
     // cap phat bo nho bang ham malloc and calloc
 
-    p = (int *)malloc(sizeof(int)); // (int *) ep kieu int
+    p = (int *)malloc(sizeof(int)); //  (int *) ep kieu int
     q = (int *)calloc(1, sizeof(int));
 
     printf("Vi tri cua con tro p la : %x\n", (unsigned int)p);
