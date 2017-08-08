@@ -49,9 +49,14 @@ int main(int count, const char *args[])
 
     // search node 
     int resultSearch;
-    int f = 7;
+    int f = 10;
     resultSearch = searchNode(i,head,f);
-    printf("found node %d", resultSearch);
+    if(resultSearch == 0){
+        printf("can't found");
+    }
+    else{
+        printf("found node on position : %d", resultSearch);
+    }
     return 0;
 }
 
@@ -101,15 +106,19 @@ struct Node * insertNodeTo(struct Node *newNode,struct Node * head,  int positio
     return head;
 }
 
-int searchNode(struct Node* i, struct Node* head, int f){
-    // int result = 0;
-    int count = 0;
-    i = head;
-    while(i != NULL && i->value != f){
-        i = i -> next;
-        count++;
+int searchNode(struct Node* countNode, struct Node* head, int f){
+    int result = 0;
+    countNode = head;
+    while(countNode != NULL && countNode->value != f){
+        countNode = countNode -> next;
+        result++;
     }
-    return count;
+    if(countNode != NULL){
+        return result;
+    }
+    else{
+        return 0;
+    }
 }
 
 int lengthOfList(struct Node* i, struct Node *head)
