@@ -17,8 +17,10 @@ struct Node
 // function
 struct Node *addNodeToHead(struct Node *newNode, struct Node *head);
 struct Node *makeNewNode(struct Node *newNode, int value);
-void insertNodeTo(struct Node *newNode, struct Node * head, int position);
+struct Node* insertNodeTo(struct Node *newNode, struct Node * head, int position);
 int lengthOfList(struct Node *i, struct Node *head);
+int searchNode(struct Node* i,struct Node* head, int f);
+
 struct Node *initLinkedList(struct Node *head){
     return head = NULL;
 }
@@ -40,11 +42,16 @@ int main(int count, const char *args[])
     head = addNodeToHead(newNode3, head);
 
     struct Node *newNode4 = makeNewNode(newNode4, 5);
-    insertNodeTo(newNode4, head,1);
-    // foreach
+    head = insertNodeTo(newNode4, head,0);
     struct Node *i;
     printf("number of element : %d\n",lengthOfList(i, head));
     printElement(i,head);
+
+    // search node 
+    int resultSearch;
+    int f = 7;
+    resultSearch = searchNode(i,head,f);
+    printf("found node %d", resultSearch);
     return 0;
 }
 
@@ -69,22 +76,40 @@ struct Node *makeNewNode(struct Node *newNode, int x)
     return newNode;
 }
 
-void insertNodeTo(struct Node *newNode,struct Node * head,  int position)
+struct Node * insertNodeTo(struct Node *newNode,struct Node * head,  int position)
 {
     struct Node *countNode;
     countNode = head;
     int i = 0;
-    if(position < 1 || position > lengthOfList(countNode, head) + 1){
-        printf("Didn't insert element");
+    if(position < 0 || position > lengthOfList(countNode, head)){
+        printf("Didn't insert element\n");
     }
     else{
-        while(countNode != NULL && i != position - 1){
-            i++;
-            countNode = countNode -> next;
+        if(position == 0){
+            head = addNodeToHead(newNode,head);
         }
-        newNode -> next = countNode->next;
-        countNode -> next = newNode;
+        else{
+            while(countNode != NULL && i != position - 1){
+                i++;
+                countNode = countNode -> next;
+            }
+            newNode -> next = countNode->next;
+            countNode -> next = newNode;
+        }
+    
     }
+    return head;
+}
+
+int searchNode(struct Node* i, struct Node* head, int f){
+    // int result = 0;
+    int count = 0;
+    i = head;
+    while(i != NULL && i->value != f){
+        i = i -> next;
+        count++;
+    }
+    return count;
 }
 
 int lengthOfList(struct Node* i, struct Node *head)
